@@ -73,6 +73,39 @@
         .dropdown-menu {
             z-index: 2000;
         }
+
+        /* تحسين ظهور اسم المنتج في الوضع الداكن والفاتح */
+.card-title a {
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+[data-bs-theme="light"] .card-title a {
+  color: #212529 !important;
+}
+
+[data-bs-theme="dark"] .card-title a {
+  color: #f8f9fa !important;
+}
+
+.card-title a:hover {
+  color: var(--brand-color) !important;
+}
+
+/* تأثير أنيق على البطاقة عند التمرير */
+.card {
+  transition: all 0.3s ease;
+  border: 1px solid var(--bs-border-color);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+/* Smooth dropdown */
+
+
     </style>
 </head>
 <body>

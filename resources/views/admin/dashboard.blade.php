@@ -23,7 +23,7 @@
                 <div class="col-md-6 col-lg-3">
             <div class="card shadow-sm border-0 text-center p-3">
                 <h5 class="fw-bold">channels</h5>
-                <p class="fs-3 text-primary">{{ \App\Models\channel::count() }}</p>
+                <p class="fs-3 text-primary">{{ \App\Models\Channel::count() }}</p>
                 <a href="{{ route('admin.channels.index') }}" class="btn btn-outline-primary btn-sm">Manage</a>
             </div>
         </div>

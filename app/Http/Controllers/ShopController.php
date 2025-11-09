@@ -12,7 +12,7 @@ class ShopController extends Controller
     {
         $categories = Category::orderBy('name')->get();
 
-        $query = Product::with('category')->latest();
+        $query = Product::with('category')->inRandomOrder();
 
         if ($req->filled('category')) {
             $query->whereHas('category', fn($q) => $q->where('slug', $req->category));

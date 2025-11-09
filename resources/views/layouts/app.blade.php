@@ -322,6 +322,60 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+<style>
+/* ===== Pagination (Tech Care Style) ===== */
+.pagination {
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 4px;
+}
+
+.page-item .page-link {
+  color: #007bff;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+
+.page-item.active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0, 123, 255, 0.3);
+}
+
+.page-item .page-link:hover {
+  background-color: #f0f8ff;
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.page-item.disabled .page-link {
+  background-color: #f8f9fa;
+  color: #aaa;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-item .page-link {
+    background-color: #1c1c1c;
+    color: #bbb;
+    border-color: #333;
+  }
+  .page-item.active .page-link {
+    background-color: #0d6efd;
+    color: white;
+  }
+  .page-item .page-link:hover {
+    background-color: #0d6efd22;
+    color: #0d6efd;
+  }
+}
+</style>
 
 
 </html>

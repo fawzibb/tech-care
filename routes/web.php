@@ -88,6 +88,8 @@ Route::prefix('admin')
     });
     Route::get('/cart/dropdown', [CartController::class, 'dropdown'])->name('cart.dropdown');
 
+Route::delete('/admin/media/{media}', [ProductController::class, 'deleteMedia'])->name('admin.media.delete');
+Route::post('/admin/media/{media}', [ProductController::class, 'updateMedia'])->name('admin.media.update');
 
 // --------------------------------------------------
 // 🔑 نظام الدخول والتسجيل

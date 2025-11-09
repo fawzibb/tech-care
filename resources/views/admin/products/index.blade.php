@@ -25,16 +25,19 @@
   @endif
 
   <div class="row g-4">
+    {{-- Create new product --}}
     <div class="col-lg-5">
       <div class="card border-0 shadow-sm">
         <div class="card-body">
-          <h5 class="mb-3">Create New Product</h5>
+          <h5 class="mb-3 fw-bold">Create New Product</h5>
           <form action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data">
             @csrf
+
             <div class="mb-3">
               <label class="form-label">Name</label>
               <input type="text" name="name" class="form-control" required>
             </div>
+
             <div class="mb-3">
               <label class="form-label">Category</label>
               <select name="category_id" class="form-select" required>
@@ -44,24 +47,52 @@
                 @endforeach
               </select>
             </div>
+
             <div class="mb-3">
               <label class="form-label">Price (USD)</label>
               <input type="number" name="price" step="0.01" min="0" class="form-control" required>
             </div>
+
             <div class="mb-3">
-              <label class="form-label">Image</label>
-              <input type="file" name="image" class="form-control" accept="image/*">
-            </div>
+  <label class="form-label">Media (Images or Videos)</label>
+
+  <div id="mediaInputs">
+    <input type="file" name="media[]" class="form-control mb-2" accept="image/*,video/*">
+  </div>
+
+  <button type="button" id="addMediaBtn" class="btn btn-sm btn-outline-secondary">
+    + Add another file
+  </button>
+  <small class="text-muted d-block mt-1">You can upload multiple images or videos</small>
+</div>
+
+@push('scripts')
+<script>
+  document.getElementById('addMediaBtn').addEventListener('click', function () {
+    const wrap = document.getElementById('mediaInputs');
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.name = 'media[]';
+    input.className = 'form-control mb-2';
+    input.accept = 'image/*,video/*';
+    wrap.appendChild(input);
+  });
+</script>
+@endpush
+
+
             <div class="mb-3">
               <label class="form-label">Description</label>
               <textarea name="description" rows="4" class="form-control" placeholder="Optional"></textarea>
             </div>
+
             <button class="btn btn-primary w-100">Create</button>
           </form>
         </div>
       </div>
     </div>
 
+    {{-- Product list --}}
     <div class="col-lg-7">
       <div class="card border-0 shadow-sm">
         <div class="card-body">
@@ -81,8 +112,13 @@
                   <tr>
                     <td>{{ $p->id }}</td>
                     <td class="d-flex align-items-center">
-                      @if($p->image)
-                        <img src="{{ asset('storage/'.$p->image) }}" style="height:40px;width:40px;object-fit:cover" class="rounded me-2">
+                      @php
+                        $firstMedia = $p->media->first();
+                      @endphp
+                      @if($firstMedia && $firstMedia->type === 'image')
+                        <img src="{{ asset('storage/'.$firstMedia->path) }}" style="height:40px;width:40px;object-fit:cover" class="rounded me-2">
+                      @elseif($firstMedia && $firstMedia->type === 'video')
+                        <video src="{{ asset('storage/'.$firstMedia->path) }}" style="height:40px;width:40px;object-fit:cover" muted></video>
                       @endif
                       <div>
                         <div class="fw-semibold">{{ $p->name }}</div>
